@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<!--
+  Created by IntelliJ IDEA.
+  User: tb189431e
+  Date: 7/5/13
+  Time: 2:04 PM
+-->
+
+<h:head></h:head>
+<f:view>
+    <h:form>
+    <p:dataTable id="usertypes" var="record" value="#{usertypeBackingBean.userTypes}" rows="10" liveResize="true" resizableColumns="true">
+        <f:facet name="header">
+            Questions List
+        </f:facet>
+        <p:column width="10">
+            <f:facet name="header">
+                <h:outputText maxlength="20" value="Question text :" />
+            </f:facet>
+            <h:outputText value="#{record.description}" />
+        </p:column>
+
+    </p:dataTable>
+
+    </h:form>
+
+</f:view>
+</html>
