@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name = "edu.umt.db.UserType" table="usertype" catalog="scf_forms">
+		<id name = "usertype_id" type = "int">
+		<column name = "usertype_id" />
+		<generator class = "identity"/>
+		</id>
+		<property name = "description" type = "string"/>
+		<property name = "usertypecol" type = "string"/>
+		<property name= "created" type = "java.sql.Timestamp"/>
+		
+		<set name="user" table="user" inverse="true" lazy="false"
+			fetch="select" cascade="save-update">
+			<key>
+				<column name="usertype_id" />
+			</key>
+			<one-to-many class="edu.umt.db.User" />
+		</set>
+		
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8'?>
+
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+              version="2.0">
+
+    <managed-bean>
+        <managed-bean-name>userBackingBean</managed-bean-name>
+        <managed-bean-class>edu.umt.jsf.managedbeans.UserBackingBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>usertypeBackingBean</managed-bean-name>
+        <managed-bean-class>edu.umt.jsf.managedbeans.UserTypeBackingBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>indexBackingBean</managed-bean-name>
+        <managed-bean-class>edu.umt.jsf.managedbeans.IndexBackingBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <!-- Navigation Rules -->
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>ok</from-outcome>
+            <to-view-id>/usertypes.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>new-user-created</from-outcome>
+            <to-view-id>/users.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>new-usertype</from-outcome>
+            <to-view-id>/newusertype.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>new-user</from-outcome>
+            <to-view-id>/newuser.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>list-usertypes</from-outcome>
+            <to-view-id>/usertypes.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>list-users</from-outcome>
+            <to-view-id>/users.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+</faces-config>

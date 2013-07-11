@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name ="edu.umt.db.Application" table="application" catalog="scf_forms">
+		<id name ="application_id" type ="int">
+			<column name ="application_id" />
+			<generator class ="identity" />
+		</id>
+		<property name ="index_charge" type ="string"/>
+		<property name ="balance" type ="string"/>
+		<property name ="request_amount" type ="string"/>
+		<property name ="equipment_description" type ="string"/>
+		<property name ="outside_funds" type ="string"/>
+		<property name ="use_description" type ="string"/>
+		<property name ="maintenance_responsibility" type ="string"/>
+		<property name ="new_connections" type ="string"/>
+		<property name ="provided_by" type ="string"/>
+		<property name ="pilot" type ="string"/>
+		<property name ="pilot_summary" type ="string"/>
+		<property name = "created" column = "created" type="java.sql.Timestamp"/>
+		<property name = "approvedAmount" column = "approved_amount" type="double"/>
+		<property name = "approved" column = "approved" type="int"/>
+		
+		<many-to-one name = "user" class ="edu.umt.db.User" fetch="select" lazy="false">
+			<column name ="user_id"/>
+		</many-to-one>
+				
+		<many-to-one name = "approvedUser" class ="edu.umt.db.User" fetch="select" lazy="false">
+			<column name ="approved_user_id"/>
+		</many-to-one>
+	</class>
+</hibernate-mapping>

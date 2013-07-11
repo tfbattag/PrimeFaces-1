@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:o="http://openfaces.org/">
+<!--
+  Created by IntelliJ IDEA.
+  User: tb189431e
+  Date: 7/5/13
+  Time: 2:04 PM
+-->
+<h:head>
+    <link rel="stylesheet" href="../design/css/custom.css" type="text/css" media="screen,projection"/>
+    <link rel="stylesheet" href="../design/css/menu.css" type="text/css" media="screen,projection"/>
+</h:head>
+<h:body styleClass="body">
+
+    <f:view>
+        <h:form id="newusertypeform">
+            <o:inputText id="usertype" value="#{userTypeBackingBean.description}" />
+            <o:commandButton id="utButton" action="#{userTypeBackingBean.newUserTypeAction}" value="Create Usertype" />
+        </h:form>
+    </f:view>
+</h:body>
+</html>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	 <session-factory name="SessionFactory">
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.password">scf_forms_</property>
+        <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/scf_forms</property>
+        <property name="hibernate.connection.username">scf_forms</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
+        <property name="hibernate.show_sql">true</property>
+		<property name="hibernate.connection.autocommit">true</property>
+		<property name="hbm2ddl.auto">update</property>
+		
+		<property name="hibernate.current_sesion_context_class">thread</property>
+		
+		<!-- mappings to the .hbm.xml files -->
+		<mapping resource="edu/umt/db/User.hbm.xml"/>
+		<mapping resource="edu/umt/db/UserType.hbm.xml"/>
+		<mapping resource="edu/umt/db/Application.hbm.xml"/>
+	</session-factory>
+</hibernate-configuration>

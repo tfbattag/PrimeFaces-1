@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="edu.umt.db.User" table="user" catalog="scf_forms">
+		<id name="user_id" type="int">
+			<column name="user_id" />
+			<generator class="identity"/>
+		</id>
+		<property name="fname" type="string" />
+		<property name="lname" type="string" />
+		<property name="netid" type="string" />
+		<property name="department" type="string" />
+		<property name="phone" type="java.lang.Integer" />
+		<property name="email" type="string" />
+		<property name="school" type="string" />
+		<property name="created" type="java.sql.Timestamp"/>
+		
+		<many-to-one name="usertype" class = "edu.umt.db.UserType" fetch="select">
+			<column name = "usertype_id"/>
+		</many-to-one>
+		<set name="application" table="application" inverse="true" lazy="false"
+			fetch="select" cascade="save-update">
+			<key>
+				<column name="user_id" />
+			</key>
+			<one-to-many class="edu.umt.db.Application" />
+		</set>
+	</class>
+</hibernate-mapping>
