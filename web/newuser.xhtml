@@ -2,58 +2,52 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:o="http://openfaces.org/">
+      xmlns:p="http://primefaces.org/ui">
 <!--
   Created by IntelliJ IDEA.
   User: tb189431e
   Date: 7/5/13
   Time: 2:04 PM
 -->
-<h:head>
-    <link rel="stylesheet" href="../design/css/custom.css" type="text/css" media="screen,projection"/>
-    <link rel="stylesheet" href="../design/css/menu.css" type="text/css" media="screen,projection"/>
-</h:head>
-<h:body styleClass="body">
+<h:head></h:head>
 
     <f:view>
         <h:panelGrid id="panelGrid" columns="1">
         <h:form id="newuserform">
             <h:panelGroup id="netidPanel">
                 <h:outputLabel id="netidLabel" value="NetID:" for="netid" />
-                <o:inputText id="netid" value="#{userBackingBean.netid}" />
+                <p:inputText id="netid" value="#{userBackingBean.netid}" />
             </h:panelGroup>
 
             <h:outputLabel id="fnameLabel" value="First Name:" />
-            <o:inputText id="fname" value="#{userBackingBean.fname}" />
+            <p:inputText id="fname" value="#{userBackingBean.fname}" />
 
             <h:outputLabel id="lnameLabel" value="Last Name:" />
-            <o:inputText id="lname" value="#{userBackingBean.lname}" />
+            <p:inputText id="lname" value="#{userBackingBean.lname}" />
 
             <h:outputLabel id="schoolLabel" value="School:" />
-            <o:inputText id="school" value="#{userBackingBean.school}" />
+            <p:inputText id="school" value="#{userBackingBean.school}" />
 
             <h:outputLabel id="departmentLabel" value="Department:" />
-            <o:inputText id="department" value="#{userBackingBean.department}" />
+            <p:inputText id="department" value="#{userBackingBean.department}" />
 
             <h:outputLabel id="phoneLabel" value="Phone:" />
-            <o:inputText id="phone" value="#{userBackingBean.phone}" />
+            <p:inputText id="phone" value="#{userBackingBean.phone}" />
 
             <h:outputLabel id="emailLabel" value="Email:" />
-            <o:inputText id="email" value="#{userBackingBean.email}" />
+            <p:inputText id="email" value="#{userBackingBean.email}" />
 
             <h:outputLabel id="usertypeLabel" value="User Type:" />
             <h:selectOneMenu id="usertypes" value="#{userBackingBean.usertype}">
-                <f:selectItems id="usertype" value="#{userTypeBackingBean.userTypes}"
+                <f:selectItems id="usertype" value="#{usertypeBackingBean.userTypes}"
                                var="row"
                                itemLabel="#{row.description}"
                                itemValue="#{row.usertype_id}"  />
             </h:selectOneMenu>
 
-            <o:commandButton id="uButton" action="#{userBackingBean.newUserAction}" value="Create Usertype" />
+            <p:commandButton id="uButton" action="#{userBackingBean.newUserAction}" value="Create Usertype" />
         </h:form>
         </h:panelGrid>
     </f:view>
-</h:body>
 </html>

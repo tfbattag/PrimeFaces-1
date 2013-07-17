@@ -20,6 +20,11 @@
         <managed-bean-class>edu.umt.jsf.managedbeans.IndexBackingBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>userDetailBackingBean</managed-bean-name>
+        <managed-bean-class>edu.umt.jsf.managedbeans.UserDetailBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 
     <!-- Navigation Rules -->
     <navigation-rule>

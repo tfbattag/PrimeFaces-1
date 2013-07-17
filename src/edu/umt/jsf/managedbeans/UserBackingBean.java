@@ -4,7 +4,10 @@ import edu.umt.db.DatabaseManager;
 import edu.umt.db.User;
 import edu.umt.db.UserType;
 
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -104,5 +107,23 @@ public class UserBackingBean {
 
     public void setUsertype(int usertype) {
         this.usertype = usertype;
+    }
+
+    public String newUserAction() throws Exception{
+        User u = new User();
+        u.setFname(this.fname);
+        u.setLname(this.lname);
+        u.setSchool(this.school);
+        u.setDepartment(this.department);
+        u.setEmail(this.email);
+        u.setPhone(this.phone);
+        u.setNetid(this.netid);
+        u.setUsertype(DatabaseManager.getUserType(this.usertype));
+        try{
+            DatabaseManager.insertUser(u);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return "new-user-created";
     }
 }

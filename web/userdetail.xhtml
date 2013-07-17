@@ -1,0 +1,38 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<!--
+  Created by IntelliJ IDEA.
+  User: tb189431e
+  Date: 7/5/13
+  Time: 2:04 PM
+-->
+<h:head></h:head>
+
+<f:view>
+        <h:form id="userform">
+            <p:growl id="growl" showDetail="true" />
+            <p:dashboard id="dashboard" model="#{userDetailBackingBean.model}">
+                <p:ajax event="reorder" listener="#{dashboardBean.handleReorder}" update="growl" />
+                <p:panel id="userDetails" header="User Details">
+                    <h:outputText value="#{userDetailBackingBean.user.fname}" />&nbsp;<h:outputText value="#{userDetailBackingBean.user.lname}" />
+                    <h:outputText value="#{userDetailBackingBean.user.school}" />
+                    <h:outputText value="#{userDetailBackingBean.user.department}" />
+                    <h:outputText value="#{userDetailBackingBean.user.email}" />
+                    <h:outputText value="#{userDetailBackingBean.user.phone}" />
+
+                </p:panel>
+                <p:panel id="userApplications" header="Applications">
+                    <p:dataTable id="appTable" value="#{userDetailBackingBean.user.applicationList}" var="row">
+                        <p:column>
+                            <h:outputText value="#{row.equipment_description}" />
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </p:dashboard>
+        </h:form>
+</f:view>
+</html>

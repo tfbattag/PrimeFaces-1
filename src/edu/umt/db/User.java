@@ -1,6 +1,8 @@
 package edu.umt.db;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 
@@ -17,6 +19,7 @@ public class User {
 	private Set<Application> application;
 	private User approvedUser;
 	private Timestamp created;
+    private List<Application> applicationList;
 	
 	/**
 	 * @return the user_id
@@ -141,7 +144,6 @@ public class User {
 		this.application = application;
 	}
 	
-	
 	public User getApprovedUser() {
 		return approvedUser;
 	}
@@ -155,7 +157,9 @@ public class User {
 		this.created = created;
 	}
 	
-	
+	public List<Application> getApplicationList(){
+        return new ArrayList<Application>(this.application);
+    }
 	
 
 }
