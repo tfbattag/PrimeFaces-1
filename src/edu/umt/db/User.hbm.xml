@@ -11,7 +11,7 @@
 		<property name="lname" type="string" />
 		<property name="netid" type="string" />
 		<property name="department" type="string" />
-		<property name="phone" type="java.lang.Integer" />
+		<property name="phone" type="java.math.BigInteger" />
 		<property name="email" type="string" />
 		<property name="school" type="string" />
 		<property name="created" type="java.sql.Timestamp"/>

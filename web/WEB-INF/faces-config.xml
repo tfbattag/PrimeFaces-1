@@ -25,6 +25,11 @@
         <managed-bean-class>edu.umt.jsf.managedbeans.UserDetailBean</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>applicationBackingBean</managed-bean-name>
+        <managed-bean-class>edu.umt.jsf.managedbeans.ApplicationBackingBean</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
 
     <!-- Navigation Rules -->
     <navigation-rule>
@@ -61,6 +66,12 @@
         <navigation-case>
             <from-outcome>list-users</from-outcome>
             <to-view-id>/users.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>new-application-created</from-outcome>
+            <to-view-id>/application-search.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 </faces-config>

@@ -1,0 +1,38 @@
+<!--
+  ~ Copyright (c) 2013. All rights reserved.
+  -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<!--
+  Created by IntelliJ IDEA.
+  User: tb189431e
+  Date: 7/15/13
+  Time: 9:04 PM
+-->
+<h:head></h:head>
+<h:body>
+
+    <f:view>
+        <p:dataTable var="app" value="#{applicationBackingBean.applications}">
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Application:" />
+                </f:facet>
+                <h:commandLink id="appLink" value="#{app.application_id}" action="#{app.appDetailAction}" />
+                <h:outputText value="#{app.application_id}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Description:" />
+                </f:facet>
+                <h:outputText value="#{app.equipment_description}" />
+            </p:column>
+        </p:dataTable>
+    </f:view>
+</h:body>
+</html>

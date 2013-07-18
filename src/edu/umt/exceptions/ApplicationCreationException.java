@@ -7,5 +7,12 @@ package edu.umt.exceptions;
  * Time: 8:35 PM
  * To change this template use File | Settings | File Templates.
  */
-public class ApplicationCreationException {
+public class ApplicationCreationException extends Exception{
+    public ApplicationCreationException() {
+        super();
+    }
+
+    public ApplicationCreationException(String message){
+        super("The instance of this new application: " + message + " failed.");
+    }
 }

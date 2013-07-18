@@ -1,5 +1,6 @@
 package edu.umt.db;
 
+import java.math.BigInteger;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +13,8 @@ public class User {
 	private String lname;
 	private String netid;
 	private String department;
-	private Integer phone;
+	private BigInteger phone;
+    private String phoneAsString;
 	private String email;
 	private String school;
 	private UserType usertype;
@@ -84,15 +86,19 @@ public class User {
 	/**
 	 * @return the phone
 	 */
-	public int getPhone() {
+	public BigInteger getPhone() {
 		return phone;
 	}
 	/**
 	 * @param phone the phone to set
 	 */
-	public void setPhone(int phone) {
+	public void setPhone(BigInteger phone) {
 		this.phone = phone;
 	}
+
+    public String getPhoneAsString(){
+        return this.phone.toString();
+    }
 	/**
 	 * @return the email
 	 */

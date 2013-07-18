@@ -4,6 +4,7 @@ import edu.umt.db.DatabaseManager;
 import edu.umt.db.User;
 import edu.umt.db.UserType;
 
+import java.math.BigInteger;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -24,7 +25,7 @@ public class UserBackingBean {
     private String lname;
     private String netid;
     private String department;
-    private Integer phone;
+    private String  phone;
     private String email;
     private String school;
     private int usertype;
@@ -77,11 +78,11 @@ public class UserBackingBean {
         this.department = department;
     }
 
-    public Integer getPhone() {
+    public String getPhone() {
         return phone;
     }
 
-    public void setPhone(Integer phone) {
+    public void setPhone(String phone) {
         this.phone = phone;
     }
 
@@ -116,7 +117,7 @@ public class UserBackingBean {
         u.setSchool(this.school);
         u.setDepartment(this.department);
         u.setEmail(this.email);
-        u.setPhone(this.phone);
+        u.setPhone(new BigInteger(this.phone));
         u.setNetid(this.netid);
         u.setUsertype(DatabaseManager.getUserType(this.usertype));
         try{
