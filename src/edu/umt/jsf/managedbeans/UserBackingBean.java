@@ -2,13 +2,12 @@ package edu.umt.jsf.managedbeans;
 
 import edu.umt.db.DatabaseManager;
 import edu.umt.db.User;
-import edu.umt.db.UserType;
+import edu.umt.exceptions.ApplicationDetailsException;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import java.math.BigInteger;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created with IntelliJ IDEA.
@@ -20,6 +19,7 @@ import java.util.Map;
 public class UserBackingBean {
     private List<User> users;
     private User user;
+    private User userToView;
     /* To create new users-- data from form */
     private String fname;
     private String lname;
@@ -44,6 +44,14 @@ public class UserBackingBean {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public User getUserToView() {
+        return userToView;
+    }
+
+    public void setUserToView(User userToView) {
+        this.userToView = userToView;
     }
 
     public String getFname() {
@@ -126,5 +134,16 @@ public class UserBackingBean {
             e.printStackTrace();
         }
         return "new-user-created";
+    }
+
+    public String userDetailAction() throws Exception{
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        try{
+            userToView = DatabaseManager.getUser(new Integer(request.getParameter("userId")));
+        }catch(Exception e){
+            if (userToView == null) throw new ApplicationDetailsException("Could not retrieve user.");
+        }
+
+        return "user-details";
     }
 }

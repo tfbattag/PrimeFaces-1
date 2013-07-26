@@ -16,17 +16,16 @@
         <h:form id="userform">
             <p:growl id="growl" showDetail="true" />
             <p:dashboard id="dashboard" model="#{userDetailBackingBean.model}">
-                <p:ajax event="reorder" listener="#{dashboardBean.handleReorder}" update="growl" />
                 <p:panel id="userDetails" header="User Details">
-                    <h:outputLabel value="First Name:" /><h:inputText value="#{userDetailBackingBean.user.fname}" /><br/>
-                    <h:outputLabel value="Last Name:" /><h:inputText value="#{userDetailBackingBean.user.lname}" /><br/>
-                    <h:outputLabel value="School:" /><h:inputText value="#{userDetailBackingBean.user.school}" /><br/>
-                    <h:outputLabel value="Department:" /><h:inputText value="#{userDetailBackingBean.user.department}" /><br/>
-                    <h:outputLabel value="Email:" /><h:inputText value="#{userDetailBackingBean.user.email}" maxlength="40" size="40"/><br/>
-                    <h:outputLabel value="Phone:" /> <p:inputMask value="#{userDetailBackingBean.user.phoneAsString}" mask="(999)999-9999" />
+                    <h:outputLabel value="First Name:" /><h:inputText value="#{userBackingBean.userToView.fname}" /><br/>
+                    <h:outputLabel value="Last Name:" /><h:inputText value="#{userBackingBean.userToView.lname}" /><br/>
+                    <h:outputLabel value="School:" /><h:inputText value="#{userBackingBean.userToView.school}" /><br/>
+                    <h:outputLabel value="Department:" /><h:inputText value="#{userBackingBean.userToView.department}" /><br/>
+                    <h:outputLabel value="Email:" /><h:inputText value="#{userBackingBean.userToView.email}" maxlength="40" size="40"/><br/>
+                    <h:outputLabel value="Phone:" /> <p:inputMask value="#{userBackingBean.userToView.phoneAsString}" mask="(999)999-9999" />
                 </p:panel>
-                <p:panel id="userApplications" header="Applications">
-                    <p:dataTable id="appTable" value="#{userDetailBackingBean.user.applicationList}" var="row">
+                <p:panel id="userApplications" header="User's Applications">
+                    <p:dataTable id="appTable" value="#{userBackingBean.userToView.applicationList}" var="row">
                         <p:column>
                             <h:outputText value="#{row.equipment_description}" />
                         </p:column>

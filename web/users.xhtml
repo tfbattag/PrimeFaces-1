@@ -14,7 +14,16 @@
 <h:body>
 
 <f:view>
+    <h:form>
     <p:dataTable var="record" value="#{userBackingBean.users}">
+        <p:column>
+            <f:facet name="header">
+                <h:outputText value="User ID:" />
+            </f:facet>
+            <h:commandLink id="userIdLink" value="#{record.user_id}" action="#{userBackingBean.userDetailAction}">
+                <f:param name="userId" value="#{record.user_id}" />
+            </h:commandLink>
+        </p:column>
         <p:column>
             <f:facet name="header">
                 <h:outputText value="First Name:" />
@@ -46,6 +55,7 @@
             <h:outputText value="#{record.phone}" />
         </p:column>
     </p:dataTable>
+    </h:form>
 </f:view>
 </h:body>
 </html>
