@@ -9,7 +9,7 @@
 		</id>
 		<property name ="index_charge" type ="string"/>
 		<property name ="balance" type ="string"/>
-		<property name ="request_amount" type ="string"/>
+		<property name ="request_amount" type ="double"/>
 		<property name ="equipment_description" type ="string"/>
 		<property name ="outside_funds" type ="string"/>
 		<property name ="use_description" type ="string"/>

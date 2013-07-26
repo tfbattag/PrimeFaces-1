@@ -3,8 +3,13 @@ package edu.umt.jsf.managedbeans;
 import edu.umt.db.Application;
 import edu.umt.db.DatabaseManager;
 import edu.umt.db.User;
-import edu.umt.exceptions.ApplicationCreationException;
+import edu.umt.exceptions.ApplicationDetailsException;
+import edu.umt.exceptions.ApplicationInsertException;
+import org.hibernate.HibernateException;
+import org.apache.log4j.Logger;
 
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 /**
@@ -15,8 +20,10 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class ApplicationBackingBean {
+    private Logger log = Logger.getLogger(ApplicationBackingBean.class);
     private List<Application> applications;
     private Application application;
+    private Application applicationToView;
     private String index_charge;
     private String balance;
     private String request_amount;
@@ -47,6 +54,14 @@ public class ApplicationBackingBean {
 
     public void setApplication(Application application) {
         this.application = application;
+    }
+
+    public Application getApplicationToView() {
+        return applicationToView;
+    }
+
+    public void setApplicationToView(Application applicationToView) {
+        this.applicationToView = applicationToView;
     }
 
     public String getIndex_charge() {
@@ -169,11 +184,11 @@ public class ApplicationBackingBean {
         this.approvedAmount = approvedAmount;
     }
 
-    public String newApplicationAction() throws ApplicationCreationException{
+    public String newApplicationAction() throws ApplicationInsertException {
         Application a = new Application();
         a.setEquipment_description(this.equipment_description);
         a.setMaintenance_responsibility(this.maintenance_responsibility);
-        a.setRequest_amount(this.request_amount);
+        a.setRequest_amount(new Double(this.request_amount).doubleValue());
         a.setNew_connections(this.new_connections);
         a.setOutside_funds(this.outside_funds);
         a.setPilot(this.pilot);
@@ -182,10 +197,29 @@ public class ApplicationBackingBean {
         a.setUse_description(this.use_description);
 
         try{
+            log.debug("Attempting to insert new Application.");
             DatabaseManager.insertApplication(a);
+        }catch(HibernateException he){
+            // do something different.
+            log.error(he);
         }catch(Exception e){
-            throw new ApplicationCreationException(a.getUse_description());
+            throw new ApplicationInsertException(a.getUse_description());
+            //TODO: check Database Manger for throw versus catch.
         }
         return "new-application-created";
+    }
+
+    public String applicationDetailsAction() throws ApplicationDetailsException {
+        log.debug("Navigating to application details.");
+
+        HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext().getRequest();
+        try{
+            applicationToView = DatabaseManager.getApplication(new Integer(request.getParameter("appId")));
+        }catch(Exception e){
+            if (applicationToView == null) throw new ApplicationDetailsException("Could not retrieve application.");
+            log.error(e);
+        }
+
+        return "application-details";
     }
 }

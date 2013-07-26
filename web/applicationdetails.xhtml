@@ -1,0 +1,46 @@
+<!--
+  ~ Copyright (c) 2013. All rights reserved.
+  -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+    <f:view>
+        <h:form>
+            <p:panel>
+                <h:outputLabel value="Application Number: " />
+                <h:inputText value="#{applicationBackingBean.applicationToView.application_id}" />
+                <br />
+                <h:outputLabel value="Submitted Date: " />
+                <h:inputText value="#{applicationBackingBean.applicationToView.created}">
+                    <f:convertDateTime dateStyle="medium" />
+                </h:inputText>
+                <br />
+                <h:outputLabel value="Description: " />
+                <h:inputText value="#{applicationBackingBean.applicationToView.equipment_description}" />
+                <br />
+                <h:outputLabel value="Requested Amount: " />
+                <h:inputText value="#{applicationBackingBean.applicationToView.request_amount}">
+                    <f:convertNumber currencyCode="USD" type="currency" />
+                </h:inputText>
+                <br />
+                <h:outputLabel value="Applicant First Name: " />
+                <h:inputText value="#{applicationBackingBean.applicationToView.user.fname}" />
+                <br />
+                <h:outputLabel value="Applicant Last Name: " />
+                <h:inputText value="#{applicationBackingBean.applicationToView.user.lname}" />
+                <br />
+                <h:outputLabel value="Applicant School/Office: " />
+                <h:inputText value="#{applicationBackingBean.applicationToView.user.school}" />
+                <br />
+                <h:outputLabel value="Applicant Department: " />
+                <h:inputText value="#{applicationBackingBean.applicationToView.user.department}" />
+                <br />
+            </p:panel>
+        </h:form>
+    </f:view>
+</html>

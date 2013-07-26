@@ -7,7 +7,7 @@ public class Application {
 	private int application_id;
 	private String index_charge;
 	private String balance;
-	private String request_amount;
+	private double request_amount;
 	private String equipment_description;
 	private String outside_funds;
 	private String use_description;
@@ -41,10 +41,10 @@ public class Application {
 	public void setBalance(String balance) {
 		this.balance = balance;
 	}
-	public String getRequest_amount() {
+	public double getRequest_amount() {
 		return request_amount;
 	}
-	public void setRequest_amount(String request_amount) {
+	public void setRequest_amount(double request_amount) {
 		this.request_amount = request_amount;
 	}
 	public String getEquipment_description() {

@@ -18,13 +18,15 @@
 <h:body>
 
     <f:view>
+        <h:form id="appForm">
         <p:dataTable var="app" value="#{applicationBackingBean.applications}">
             <p:column>
                 <f:facet name="header">
                     <h:outputText value="Application:" />
                 </f:facet>
-                <h:commandLink id="appLink" value="#{app.application_id}" action="#{app.appDetailAction}" />
-                <h:outputText value="#{app.application_id}" />
+                <h:commandLink id="appLink" value="#{app.application_id}" action="#{applicationBackingBean.applicationDetailsAction}">
+                    <f:param id="appId" name="appId" value="#{app.application_id}" />
+                </h:commandLink>
             </p:column>
             <p:column>
                 <f:facet name="header">
@@ -33,6 +35,7 @@
                 <h:outputText value="#{app.equipment_description}" />
             </p:column>
         </p:dataTable>
+        </h:form>
     </f:view>
 </h:body>
 </html>
