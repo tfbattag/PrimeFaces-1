@@ -3,6 +3,9 @@ package edu.umt.jsf.managedbeans;
 import edu.umt.db.DatabaseManager;
 import edu.umt.db.User;
 import edu.umt.exceptions.ApplicationDetailsException;
+import edu.umt.exceptions.UserException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +20,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public class UserBackingBean {
+    private Logger log = LoggerFactory.getLogger(UserBackingBean.class);
     private List<User> users;
     private User user;
     private User userToView;
@@ -118,22 +122,42 @@ public class UserBackingBean {
         this.usertype = usertype;
     }
 
-    public String newUserAction() throws Exception{
+    public String newUserAction() throws UserException{
         User u = new User();
         u.setFname(this.fname);
         u.setLname(this.lname);
         u.setSchool(this.school);
         u.setDepartment(this.department);
         u.setEmail(this.email);
-        u.setPhone(new BigInteger(this.phone));
+        try{
+            u.setPhone(new BigInteger(this.phone));
+        }catch(NumberFormatException nfe){
+            log.error("Phone number entered: " + u.getPhone() + " was invalid.");
+            log.error(nfe.toString());
+            throw new UserException("Invalid Phone.");
+        }
         u.setNetid(this.netid);
         u.setUsertype(DatabaseManager.getUserType(this.usertype));
+
         try{
+            log.debug("Attempting to inser user.");
             DatabaseManager.insertUser(u);
+        }catch(UserException ue){
+            log.error(ue.toString());
+            return "new-user";
         }catch(Exception e){
             e.printStackTrace();
         }
         return "new-user-created";
+    }
+
+    public String updateUserAction() throws Exception{
+        try{
+            DatabaseManager.updateUser(userToView);
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return "user-updated";
     }
 
     public String userDetailAction() throws Exception{

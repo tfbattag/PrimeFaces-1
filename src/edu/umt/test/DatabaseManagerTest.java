@@ -4,6 +4,7 @@ import edu.umt.db.Application;
 import edu.umt.db.DatabaseManager;
 import edu.umt.db.User;
 import edu.umt.db.UserType;
+import edu.umt.exceptions.UserException;
 import edu.umt.test.mocks.MockObjectFactory;
 import junit.framework.TestCase;
 import org.junit.Test;
@@ -109,9 +110,12 @@ public class DatabaseManagerTest extends TestCase {
 	public void testInsertUser() {
 		User user = (User) MockObjectFactory.getMockObject("USER");
 		user.setUsertype(DatabaseManager.getUserType(1));
-		DatabaseManager.insertUser(user);
+
 		try {
+            DatabaseManager.insertUser(user);
 			assertTrue(user != null);
+        }catch (UserException ue){
+            ue.printStackTrace();
 		} catch (Exception e) {
 			System.out.println(e);
 		}
@@ -202,7 +206,11 @@ public class DatabaseManagerTest extends TestCase {
 		int tempUserId = 0;
 		User user = (User) MockObjectFactory.getMockObject("USER");
 		user.setUsertype(DatabaseManager.getUserType(1));
-		DatabaseManager.insertUser(user);
+        try{
+		    DatabaseManager.insertUser(user);
+        } catch (UserException ue){
+            ue.printStackTrace();
+        }
 		tempUserId = user.getUser_id();
 		DatabaseManager.deleteUser(user);
 		try {

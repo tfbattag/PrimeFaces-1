@@ -1,13 +1,18 @@
 package edu.umt.db;
 
+import edu.umt.exceptions.UserException;
 import org.hibernate.Query;
 import org.hibernate.Session;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 //Talk take 2
 
 
 public class DatabaseManager {
+    private static Logger log = LoggerFactory.getLogger(DatabaseManager.class);
+
 	static Session session;
 	
 	public static UserType getUserType(int usertype_id){
@@ -71,6 +76,7 @@ public class DatabaseManager {
 	
 	public static List<User> getUsers(){
 		List<User> users = null;
+        log.debug("Entering getUsers() method.");
 		try{
 			session = HibernateSessionFactory.currentSession();
 			Query q = session.createQuery(" from User");
@@ -87,6 +93,7 @@ public class DatabaseManager {
 	
 	public static List<Application> getApplications() {
 		List<Application> applications = null;
+        log.debug("Executing the getApplications() method.");
 		try{
 			session = HibernateSessionFactory.currentSession();
 			Query q= session.createQuery(" from Application");
@@ -113,12 +120,14 @@ public class DatabaseManager {
 		}
 	}
 	
-	public static void insertUser(User user){
+	public static void insertUser(User user) throws UserException {
 		try{
 			session = HibernateSessionFactory.currentSession();
 			session.save(user);
 		}catch(Exception e){
-			e.printStackTrace();
+			log.error("Failed to insert user: " + user.getLname() + " " + user.getFname());
+            log.error(e.toString());
+            throw new UserException("Could not insert the user: " + user.getFname() + " " + user.getLname());
 		}finally{
 			session.flush();
 			session.close();

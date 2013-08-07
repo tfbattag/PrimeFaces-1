@@ -23,6 +23,7 @@
                     <h:outputLabel value="Department:" /><h:inputText value="#{userBackingBean.userToView.department}" /><br/>
                     <h:outputLabel value="Email:" /><h:inputText value="#{userBackingBean.userToView.email}" maxlength="40" size="40"/><br/>
                     <h:outputLabel value="Phone:" /> <p:inputMask value="#{userBackingBean.userToView.phoneAsString}" mask="(999)999-9999" />
+                    <p:commandButton value="Save User" action="#{userBackingBean.updateUserAction}" />
                 </p:panel>
                 <p:panel id="userApplications" header="User's Applications">
                     <p:dataTable id="appTable" value="#{userBackingBean.userToView.applicationList}" var="row">

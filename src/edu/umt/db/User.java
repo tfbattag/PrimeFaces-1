@@ -99,7 +99,12 @@ public class User {
     public String getPhoneAsString(){
         return this.phone.toString();
     }
-	/**
+
+    public void setPhoneAsString(String phoneAsString) {
+        this.phone = new BigInteger(phoneAsString.replaceAll("[^\\d]", ""));
+    }
+
+    /**
 	 * @return the email
 	 */
 	public String getEmail() {
