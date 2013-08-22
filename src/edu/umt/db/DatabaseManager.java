@@ -76,7 +76,6 @@ public class DatabaseManager {
 	
 	public static List<User> getUsers(){
 		List<User> users = null;
-        log.debug("Entering getUsers() method.");
 		try{
 			session = HibernateSessionFactory.currentSession();
 			Query q = session.createQuery(" from User");
@@ -93,7 +92,6 @@ public class DatabaseManager {
 	
 	public static List<Application> getApplications() {
 		List<Application> applications = null;
-        log.debug("Executing the getApplications() method.");
 		try{
 			session = HibernateSessionFactory.currentSession();
 			Query q= session.createQuery(" from Application");

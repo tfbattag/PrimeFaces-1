@@ -42,5 +42,12 @@
                 <br />
             </p:panel>
         </h:form>
+        <h:form id="viewAttachmentForm" method="GET" rendered="#{!empty applicationBackingBean.applicationToView.attachment}">
+            <p:panel>
+            <p:commandLink action="#{applicationBackingBean.viewAttachment()}" type="application/pdf" ajax="false">
+                <h:outputText value="View Attachment" />
+            </p:commandLink>
+            </p:panel>
+        </h:form>
     </f:view>
 </html>

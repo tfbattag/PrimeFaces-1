@@ -21,8 +21,11 @@
 		<property name = "created" column = "created" type="java.sql.Timestamp"/>
 		<property name = "approvedAmount" column = "approved_amount" type="double"/>
 		<property name = "approved" column = "approved" type="int"/>
-		
-		<many-to-one name = "user" class ="edu.umt.db.User" fetch="select" lazy="false">
+        <property name="attachment" type="binary">
+            <column name="attachment"></column>
+        </property>
+
+        <many-to-one name = "user" class ="edu.umt.db.User" fetch="select" lazy="false">
 			<column name ="user_id"/>
 		</many-to-one>
 				

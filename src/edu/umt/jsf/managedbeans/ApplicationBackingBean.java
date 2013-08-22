@@ -7,9 +7,18 @@ import edu.umt.exceptions.ApplicationDetailsException;
 import edu.umt.exceptions.ApplicationInsertException;
 import org.hibernate.HibernateException;
 import org.apache.log4j.Logger;
+import org.primefaces.event.FileUploadEvent;
+import org.primefaces.model.UploadedFile;
 
+import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 /**
@@ -36,9 +45,12 @@ public class ApplicationBackingBean {
     private String pilot;
     private String pilot_summary;
     private User user;
+    private int userId;
     private User approvedUser;
     private int approved;
     private Double approvedAmount;
+    private byte[] attachment;
+    private UploadedFile file;
 
     public List<Application> getApplications() {
         return DatabaseManager.getApplications();
@@ -160,6 +172,14 @@ public class ApplicationBackingBean {
         this.user = user;
     }
 
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
     public User getApprovedUser() {
         return approvedUser;
     }
@@ -184,17 +204,36 @@ public class ApplicationBackingBean {
         this.approvedAmount = approvedAmount;
     }
 
+    public byte[] getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(byte[] attachment) {
+        this.attachment = attachment;
+    }
+
+    public void handleFileUpload(FileUploadEvent event){
+        FacesMessage msg = new FacesMessage("Successful", event.getFile().getFileName() + "uploaded.");
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+        this.attachment = event.getFile().getContents();
+    }
+
     public String newApplicationAction() throws ApplicationInsertException {
         Application a = new Application();
         a.setEquipment_description(this.equipment_description);
         a.setMaintenance_responsibility(this.maintenance_responsibility);
         a.setRequest_amount(new Double(this.request_amount).doubleValue());
+        a.setApprovedAmount(new Double(0).doubleValue());
         a.setNew_connections(this.new_connections);
         a.setOutside_funds(this.outside_funds);
         a.setPilot(this.pilot);
         a.setPilot_summary(this.pilot_summary);
         a.setProvided_by(this.provided_by);
         a.setUse_description(this.use_description);
+        a.setUser(DatabaseManager.getUser(this.userId));
+        if(attachment != null){
+               a.setAttachment(this.attachment);
+        }
 
         try{
             log.debug("Attempting to insert new Application.");
@@ -222,4 +261,53 @@ public class ApplicationBackingBean {
 
         return "application-details";
     }
+
+    /**
+     * This method will use the afidavitToView object and stream its originalForm byte array
+     * back to the browser as a PDF.
+     */
+    public void viewOriginalAction() {
+        try {
+            ByteArrayOutputStream baosPDF = new ByteArrayOutputStream();
+
+            if (applicationToView.getAttachment()!= null) {
+                baosPDF.write(applicationToView.getAttachment());
+
+                HttpServletResponse response = (HttpServletResponse)FacesContext.getCurrentInstance().getExternalContext().getResponse();
+                response.setContentType("application/pdf");
+                response.setHeader("Content-disposition", "attachment; filename=tempPDF.pdf");
+                response.setHeader("Cache-Control", "no-cache");
+                response.setContentLength(baosPDF.size());
+                response.setHeader("Pragma", "public");
+
+                ServletOutputStream sos;
+                sos = response.getOutputStream();
+                baosPDF.writeTo(sos);
+                sos.flush();
+
+                FacesContext.getCurrentInstance().responseComplete();
+            } else {
+                FacesContext.getCurrentInstance().responseComplete();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void viewAttachment() throws IOException {
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ByteArrayOutputStream baosPDF = new ByteArrayOutputStream();
+
+        if (applicationToView.getAttachment()!= null) baosPDF.write(applicationToView.getAttachment());
+        ec.responseReset();
+        ec.setResponseContentType("application/pdf");
+        ec.setResponseContentLength(baosPDF.size());
+        ec.addResponseHeader("Content-Disposition", "inline; filename=tempPDF.pdf");
+
+        OutputStream output = ec.getResponseOutputStream();
+        baosPDF.writeTo(output);
+
+        FacesContext.getCurrentInstance().responseComplete();
+    }
+
 }

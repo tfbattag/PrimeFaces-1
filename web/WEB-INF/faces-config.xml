@@ -68,12 +68,7 @@
             <to-view-id>/users.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    <navigation-rule>
-        <navigation-case>
-            <from-outcome>new-application-created</from-outcome>
-            <to-view-id>/application-search.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+
     <navigation-rule>
         <navigation-case>
             <from-outcome>application-details</from-outcome>
@@ -90,6 +85,12 @@
         <navigation-case>
             <from-outcome>user-updated</from-outcome>
             <to-view-id>/users.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <navigation-case>
+            <from-outcome>new-application-created</from-outcome>
+            <to-view-id>/applications.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 

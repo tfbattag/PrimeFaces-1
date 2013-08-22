@@ -21,6 +21,7 @@ public class Application {
 	private int approved;
 	private Double approvedAmount;
 	private Timestamp created;
+    private byte[] attachment;
 	
 	
 	public int getApplication_id() {
@@ -125,8 +126,13 @@ public class Application {
 	public void setCreated(Timestamp created) {
 		this.created = created;
 	}
-	
-	
-	
+
+    public byte[] getAttachment() {
+        return attachment;
+    }
+
+    public void setAttachment(byte[] attachment) {
+        this.attachment = attachment;
+    }
 }
 

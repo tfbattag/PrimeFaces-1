@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2013. All rights reserved.
+  -->
+
+<!--
+  Created by IntelliJ IDEA.
+  User: tb189431e
+  Date: 8/7/13
+  Time: 4:52 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<h:head></h:head>
+<f:view>
+    <h:form enctype="multipart/form-data">
+        <p:panel>
+            <h:outputLabel value="Description: " />
+            <h:inputText value="#{applicationBackingBean.equipment_description}" />
+            <br />
+            <h:outputLabel value="Requested Amount: " />
+            <h:inputText value="#{applicationBackingBean.request_amount}" />
+            <br />
+            <h:selectOneMenu id="usertypes" value="#{applicationBackingBean.userId}">
+                <f:selectItems id="usertype" value="#{userBackingBean.users}"
+                               var="row"
+                               itemLabel="#{row.fname}  #{row.lname}"
+                               itemValue="#{row.user_id}"  />
+            </h:selectOneMenu>
+            <br />
+            <p:fileUpload fileUploadListener="#{applicationBackingBean.handleFileUpload}"
+                          mode="advanced"
+                          auto="false"
+                          update="messages"
+                          allowTypes="/(\.|\/)(pdf)$/"
+                          fileLimit="1" />
+            <p:growl id="messages" showDetail="true" />
+
+
+            <p:commandButton id="submitButton" action="#{applicationBackingBean.newApplicationAction}" value="Submit Application" />
+        </p:panel>
+    </h:form>
+</f:view>
+</html>
